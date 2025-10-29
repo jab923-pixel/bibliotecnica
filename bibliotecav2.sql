@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 12, 2025 at 07:14 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 24-10-2025 a las 21:15:07
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bibliotecav2`
+-- Base de datos: `bibliotecav2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area_tematica`
+-- Estructura de tabla para la tabla `area_tematica`
 --
 
 CREATE TABLE `area_tematica` (
@@ -33,16 +33,35 @@ CREATE TABLE `area_tematica` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `area_tematica`
+-- Volcado de datos para la tabla `area_tematica`
 --
 
 INSERT INTO `area_tematica` (`id_area_tematica`, `nombre_area`) VALUES
-(1, 'comedia');
+(1, 'Ciencia Ficción'),
+(2, 'Historia'),
+(3, 'Fantasía'),
+(4, 'Tecnología'),
+(5, 'Romance'),
+(6, 'Terror'),
+(7, 'Distopía'),
+(8, 'Fábula'),
+(9, 'Clásicos'),
+(10, 'Misterio'),
+(11, 'Novela'),
+(12, 'Filosofía'),
+(13, 'Ciencia'),
+(14, 'Estrategia'),
+(15, ''),
+(16, ''),
+(17, ''),
+(18, 'xd'),
+(19, ''),
+(20, 'xd');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autor`
+-- Estructura de tabla para la tabla `autor`
 --
 
 CREATE TABLE `autor` (
@@ -51,16 +70,44 @@ CREATE TABLE `autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `autor`
+-- Volcado de datos para la tabla `autor`
 --
 
 INSERT INTO `autor` (`id_autor`, `nombre_autor`) VALUES
-(1, 'pandora actor');
+(1, 'Isaac Asimov'),
+(2, 'Gabriel García Márquez'),
+(3, 'J.K. Rowling'),
+(4, 'Stephen King'),
+(5, 'Yuval Noah Harari'),
+(6, 'Jane Austen'),
+(7, 'George Orwell'),
+(8, 'Mary Shelley'),
+(9, 'Julio Verne'),
+(10, 'Dan Brown'),
+(11, 'Miguel de Cervantes'),
+(12, 'H.P. Lovecraft'),
+(13, 'xd'),
+(14, 'xdxd'),
+(15, 'Frank Herbert'),
+(16, 'Antoine de Saint-Exupéry'),
+(17, 'Homero'),
+(18, 'Umberto Eco'),
+(19, 'Ray Bradbury'),
+(20, 'Platón'),
+(21, 'Stephen Hawking'),
+(22, 'Sun Tzu'),
+(23, 'Pechuga'),
+(24, 'Pechuga'),
+(25, 'Pechuga'),
+(26, 'Pechuga'),
+(27, 'Pechuga'),
+(28, 'asd'),
+(29, 'asd');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `baja`
+-- Estructura de tabla para la tabla `baja`
 --
 
 CREATE TABLE `baja` (
@@ -74,7 +121,7 @@ CREATE TABLE `baja` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `devolucion`
+-- Estructura de tabla para la tabla `devolucion`
 --
 
 CREATE TABLE `devolucion` (
@@ -84,17 +131,10 @@ CREATE TABLE `devolucion` (
   `observaciones_estado_fisico` text CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `devolucion`
---
-
-INSERT INTO `devolucion` (`id_devolucion`, `id_prestamo`, `fecha_devolucion_real`, `observaciones_estado_fisico`) VALUES
-(1, 1, '2025-09-04', 'en buen estado');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `editorial`
+-- Estructura de tabla para la tabla `editorial`
 --
 
 CREATE TABLE `editorial` (
@@ -103,43 +143,75 @@ CREATE TABLE `editorial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `editorial`
+-- Volcado de datos para la tabla `editorial`
 --
 
 INSERT INTO `editorial` (`id_editorial`, `nombre_editorial`) VALUES
-(1, 'Pandora\'s');
+(1, 'Planeta'),
+(2, 'Penguin Random House'),
+(3, 'HarperCollins'),
+(4, 'Editorial Norma'),
+(5, 'Anagrama'),
+(6, 'Seix Barral'),
+(7, 'xd'),
+(8, 'xdxd'),
+(9, 'Sudamericana'),
+(10, 'Chilton Books'),
+(11, 'Debate'),
+(12, 'Secker & Warburg'),
+(13, 'Reynal & Hitchcock'),
+(14, 'Gredos'),
+(15, 'Bompiani'),
+(16, 'Francisco de Robles'),
+(17, 'La Oveja Negra'),
+(18, 'Ballantine Books'),
+(19, 'Crítica'),
+(20, 'Alianza Editorial'),
+(21, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `libro`
+-- Estructura de tabla para la tabla `libro`
 --
 
 CREATE TABLE `libro` (
   `id_libro` int(11) NOT NULL,
   `titulo` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `id_editorial` int(11) NOT NULL,
-  `ano_publicacion` year(4) NOT NULL,
+  `ano_publicacion` smallint(4) NOT NULL,
   `edicion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `ISBN` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `codigo_clasificacion` int(11) DEFAULT NULL,
+  `codigo_clasificacion` varchar(11) DEFAULT NULL,
   `id_area_tematica` int(11) NOT NULL,
   `numero_inventario` int(11) NOT NULL,
-  `estado` enum('disponible','dañado','baja') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `estado` enum('disponible','dañado','baja','prestado') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `observaciones` text CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `libro`
+-- Volcado de datos para la tabla `libro`
 --
 
 INSERT INTO `libro` (`id_libro`, `titulo`, `id_editorial`, `ano_publicacion`, `edicion`, `ISBN`, `codigo_clasificacion`, `id_area_tematica`, `numero_inventario`, `estado`, `observaciones`) VALUES
-(1, 'La Rosa de Guadalupe', 1, '2008', '1ra', '0-7103-7642-1', 0, 1, 1001, 'disponible', '');
+(1, 'Cien años de soledad', 9, 1967, 'Primera', '978-84-376-0494-7', 'F-L-GGM', 3, 0, 'disponible', 'Sin observaciones'),
+(2, 'Dune', 10, 1965, 'Edición de bolsillo', '978-0-441-17271-9', 'CF-H-FH', 1, 0, 'disponible', 'Sin observaciones'),
+(3, 'Sapiens: De animales a dioses', 11, 2014, 'Edición revisada', '978-84-9992-622-6', 'H-A-YNH', 2, 0, 'disponible', 'Sin observaciones'),
+(4, '1984', 12, 1949, 'Primera', '978-0-452-28423-4', 'D-GO-1984', 7, 0, 'disponible', 'Sin observaciones'),
+(5, 'El Principito', 13, 1943, 'Primera', '978-84-376-0494-0', 'F-AS-EP', 8, 0, 'disponible', 'Sin observaciones'),
+(6, 'La Odisea', 14, -800, 'Edición crítica', '978-84-249-2210-3', 'C-H-OD', 9, 0, 'disponible', 'Sin observaciones'),
+(7, 'El nombre de la rosa', 15, 1980, 'Primera', '978-84-339-7346-3', 'M-UE-NR', 10, 0, 'disponible', 'Sin observaciones'),
+(8, 'Don Quijote de la Mancha', 16, 1605, 'Primera', '978-84-376-0494-8', 'C-MC-DQ', 9, 0, 'disponible', 'Sin observaciones'),
+(9, 'Crónica de una muerte anunciada', 17, 1981, 'Primera', '978-84-376-0494-9', 'N-GGM-CMA', 11, 0, 'disponible', 'Sin observaciones'),
+(10, 'Fahrenheit 451', 18, 1953, 'Primera', '978-0-7432-4722-1', 'CF-RB-F451', 1, 0, 'disponible', 'Sin observaciones'),
+(11, 'La República', 14, -380, 'Edición crítica', '978-84-249-1321-7', 'F-P-REP', 12, 0, 'disponible', 'Sin observaciones'),
+(12, 'Breves respuestas a las grandes preguntas', 19, 2018, 'Primera', '978-84-9199-037-2', 'C-SH-BRGP', 13, 0, 'disponible', 'Sin observaciones'),
+(13, 'El arte de la guerra', 20, -500, 'Edición crítica', '978-84-206-5742-7', 'E-ST-AG', 14, 0, 'disponible', 'Sin observaciones');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `libro_autor`
+-- Estructura de tabla para la tabla `libro_autor`
 --
 
 CREATE TABLE `libro_autor` (
@@ -149,16 +221,28 @@ CREATE TABLE `libro_autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `libro_autor`
+-- Volcado de datos para la tabla `libro_autor`
 --
 
 INSERT INTO `libro_autor` (`id_libro`, `id_autor`, `id_compuesta`) VALUES
-(1, 1, 1);
+(1, 2, 1),
+(2, 15, 2),
+(3, 5, 3),
+(4, 7, 4),
+(5, 16, 5),
+(6, 17, 6),
+(7, 18, 7),
+(8, 11, 8),
+(9, 2, 9),
+(10, 19, 10),
+(11, 20, 11),
+(12, 21, 12),
+(13, 22, 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prestamo`
+-- Estructura de tabla para la tabla `prestamo`
 --
 
 CREATE TABLE `prestamo` (
@@ -169,71 +253,67 @@ CREATE TABLE `prestamo` (
   `fecha_devolucion_estimada` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `prestamo`
---
-
-INSERT INTO `prestamo` (`id_prestamo`, `id_usuario`, `id_libro`, `fecha_prestamo`, `fecha_devolucion_estimada`) VALUES
-(1, 1, 1, '2025-09-03', '2025-09-17');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nombre_completo` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(255) NOT NULL,
   `tipo_usuario` enum('estudiante','docente') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `dni_o_matricula` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_completo`, `tipo_usuario`, `dni_o_matricula`) VALUES
-(1, 'sam', 'estudiante', 47830193);
+INSERT INTO `usuario` (`id_usuario`, `nombre_completo`, `password`, `tipo_usuario`, `dni_o_matricula`) VALUES
+(2, 'docente', '$2y$10$Uv/EmGzbVoTLMWJYbFzwMucpAHgJYTJ9uH2BhGyg/5JE4n7U.U5R6', 'docente', 222),
+(3, 'estudiante', '$2y$10$qOpdb/APzVa6I/MMoUX/Lef/cShrp94eWX8RV.yPCEDuwkbJCMZyS', 'estudiante', 111),
+(4, 'admin', '$2y$10$lZ3JK1Unzgw7FeLGZfhvP.2S5Mn249NrpDWrKosqEkBCWhwLlXkkW', 'docente', 999);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `area_tematica`
+-- Indices de la tabla `area_tematica`
 --
 ALTER TABLE `area_tematica`
   ADD PRIMARY KEY (`id_area_tematica`);
 
 --
--- Indexes for table `autor`
+-- Indices de la tabla `autor`
 --
 ALTER TABLE `autor`
   ADD PRIMARY KEY (`id_autor`);
 
 --
--- Indexes for table `baja`
+-- Indices de la tabla `baja`
 --
 ALTER TABLE `baja`
   ADD PRIMARY KEY (`id_baja`),
   ADD KEY `FK id_libro2` (`id_libro`);
 
 --
--- Indexes for table `devolucion`
+-- Indices de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   ADD PRIMARY KEY (`id_devolucion`),
   ADD KEY `FK_D_id_prestamo` (`id_prestamo`);
 
 --
--- Indexes for table `editorial`
+-- Indices de la tabla `editorial`
 --
 ALTER TABLE `editorial`
   ADD PRIMARY KEY (`id_editorial`);
 
 --
--- Indexes for table `libro`
+-- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`id_libro`),
@@ -241,7 +321,7 @@ ALTER TABLE `libro`
   ADD KEY `FK id_area_tematica` (`id_area_tematica`);
 
 --
--- Indexes for table `libro_autor`
+-- Indices de la tabla `libro_autor`
 --
 ALTER TABLE `libro_autor`
   ADD PRIMARY KEY (`id_compuesta`),
@@ -249,7 +329,7 @@ ALTER TABLE `libro_autor`
   ADD KEY `FK id_autor` (`id_autor`);
 
 --
--- Indexes for table `prestamo`
+-- Indices de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD PRIMARY KEY (`id_prestamo`),
@@ -257,101 +337,101 @@ ALTER TABLE `prestamo`
   ADD KEY `FK_P_id_libro` (`id_libro`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `area_tematica`
+-- AUTO_INCREMENT de la tabla `area_tematica`
 --
 ALTER TABLE `area_tematica`
-  MODIFY `id_area_tematica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_area_tematica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `autor`
+-- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `baja`
+-- AUTO_INCREMENT de la tabla `baja`
 --
 ALTER TABLE `baja`
   MODIFY `id_baja` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `devolucion`
+-- AUTO_INCREMENT de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
-  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `editorial`
+-- AUTO_INCREMENT de la tabla `editorial`
 --
 ALTER TABLE `editorial`
-  MODIFY `id_editorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_editorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `libro`
+-- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `libro_autor`
+-- AUTO_INCREMENT de la tabla `libro_autor`
 --
 ALTER TABLE `libro_autor`
-  MODIFY `id_compuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_compuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `prestamo`
+-- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `baja`
+-- Filtros para la tabla `baja`
 --
 ALTER TABLE `baja`
   ADD CONSTRAINT `FK id_libro2` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`);
 
 --
--- Constraints for table `devolucion`
+-- Filtros para la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   ADD CONSTRAINT `FK_D_id_prestamo` FOREIGN KEY (`id_prestamo`) REFERENCES `prestamo` (`id_prestamo`);
 
 --
--- Constraints for table `libro`
+-- Filtros para la tabla `libro`
 --
 ALTER TABLE `libro`
   ADD CONSTRAINT `FK id_area_tematica` FOREIGN KEY (`id_area_tematica`) REFERENCES `area_tematica` (`id_area_tematica`),
   ADD CONSTRAINT `FK id_editorial` FOREIGN KEY (`id_editorial`) REFERENCES `editorial` (`id_editorial`);
 
 --
--- Constraints for table `libro_autor`
+-- Filtros para la tabla `libro_autor`
 --
 ALTER TABLE `libro_autor`
   ADD CONSTRAINT `FK id_autor` FOREIGN KEY (`id_autor`) REFERENCES `autor` (`id_autor`),
   ADD CONSTRAINT `FK id_libro` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`);
 
 --
--- Constraints for table `prestamo`
+-- Filtros para la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD CONSTRAINT `FK_P_id_libro` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`),
